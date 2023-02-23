@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Nasa } from './models/nasa';
+import { imgOfTheDay } from './models/nasa';
 import { NasaService } from './nasa.service';
 
 @Component({
@@ -9,18 +9,16 @@ import { NasaService } from './nasa.service';
 })
 export class AppComponent implements OnInit{
 
-  public tabNasa: Nasa[];
-  public imgOfTheDay: string;
-  public test: string = "test"
+  public imgOfTheDay?: imgOfTheDay;
+
   
   constructor(public nasaService : NasaService){
-    this.tabNasa = []; 
-    this.imgOfTheDay= "";
   }
 
   ngOnInit(): void {
-    this.nasaService.getImageOfTheDay().subscribe(nasaJson => {
-      this.tabNasa = nasaJson
-    })
+   this.nasaService.getImageOfTheDay().subscribe(response => {
+    this.imgOfTheDay = response
+    console.log();
+   })
   }
 }
